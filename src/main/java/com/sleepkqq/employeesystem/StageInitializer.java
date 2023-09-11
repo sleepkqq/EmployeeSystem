@@ -15,7 +15,7 @@ import java.io.IOException;
 @Component
 public class StageInitializer implements ApplicationListener<StageReadyEvent> {
 
-    @Value("classpath:/main.fxml")
+    @Value("classpath:/login.fxml")
     private Resource resource;
 
     @Override
@@ -26,7 +26,7 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
 
             Stage stage = event.getStage();
             stage.setScene(new Scene(parent));
-            stage.setTitle("Login window");
+            stage.setTitle("Login");
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException();

@@ -1,22 +1,26 @@
 package com.sleepkqq.employeesystem.controller;
 
+import com.sleepkqq.employeesystem.model.Developer;
+import com.sleepkqq.employeesystem.repository.DeveloperRepository;
+import com.sleepkqq.employeesystem.repository.DeveloperRepositorySingleton;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 
 public class MainController {
 
     @FXML
-    private Button loginButton;
+    private Label username;
+    private String jwtToken;
+    private static final DeveloperRepository developerRepository = DeveloperRepositorySingleton.getInstance();
 
-    @FXML
-    private TextField name;
+    public void setJwtToken(String jwtToken) {
+        this.jwtToken = jwtToken;
+        init();
+    }
 
-    @FXML
-    private PasswordField password;
-
-    @FXML
-    private Button registerButton;
+    private void init() {
+        Developer developer = developerRepository.findByEmail(JwtUtils.getEmailFromToken(jwtToken));
+        username.setText(developer.getName());
+    }
 
 }
